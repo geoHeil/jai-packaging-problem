@@ -48,7 +48,7 @@ java / scala function to parse the files it should fail as well:
 ```
 java -jar target/scala-2.11/jaiPackagingProblems-assembly-0.0.1.SNAPSHOT.jar
 ```
-however, ti will output the result just fine
+however, it will output the result just fine
 
 ```
  ### file data/dummy2.asc with 3 polygonsGeometryId(/Users/geoheil/Downloads/dummy/spark/data/dummy2.asc,2.0,POLYGON ((3 0, 4 0, 4 3, 0 3, 0 0, 2 0, 2 1, 3 1, 3 0), (1 1, 1 2, 2 2, 2 1, 1 1)))
