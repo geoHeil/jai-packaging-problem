@@ -94,3 +94,15 @@ Implementation-Vendor: myCompany
 
 thread safety:
 geotools may not be threadsafe in general (http://docs.geotools.org/latest/userguide/library/main/repository.html) but from what I have tested for these specific features it seems to work fine. Also, when using a single threaded version of spark I still get the same error.
+
+### connecting a debugger
+To debug it I execute
+```
+export SPARK_SUBMIT_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
+spark-submit --verbose \
+    --class geo.SparkDoesNotWork \
+    --conf "spark.driver.extraJavaOptions=-XX:+UseG1GC" \
+target/scala-2.11/jaiPackagingProblems-assembly-0.0.1.SNAPSHOT.jar
+```
+Which shows 
+![null - not null validation](img/debugNotNull.png "null not null validation")
