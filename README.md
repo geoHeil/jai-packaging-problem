@@ -376,3 +376,7 @@ And the following files are merged
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.CoordinateOperationFactory' with strategy 'concat'
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.MathTransformFactory' with strategy 'concat'
 ```
+
+## different merge strategy
+
+I am pretty convinced now that something is wrong with my merge strategy. https://github.com/geoHeil/jai-packaging-problem/commit/c7ba46be2c2bcbab8196fd6ece1dfd3dece89594 Helps to get rid of all the duplciation Errors of JAI registry on startup, still the error is the same.
