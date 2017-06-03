@@ -376,3 +376,12 @@ And the following files are merged
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.CoordinateOperationFactory' with strategy 'concat'
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.MathTransformFactory' with strategy 'concat'
 ```
+
+Interesting:
+in `META-INF/registryFile.jai` is the `Vectorize` operation is contained - even though I get a null pointer when run with spark.
+```
+#
+# "rendered" factory objects
+#
+rendered  org.jaitools.media.jai.vectorize.VectorizeRIF  org.jaitools.media.jai  Vectorize  Vectorize
+```

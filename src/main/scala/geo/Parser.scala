@@ -1,5 +1,7 @@
 package geo
 
+import javax.media.jai.{ JAI, ParameterBlockJAI }
+
 import com.vividsolutions.jts.geom.Geometry
 import com.vividsolutions.jts.io.WKTWriter
 import org.geotools.coverage.grid.GridCoverage2D
@@ -24,6 +26,13 @@ object Parser {
     println(com.sun.media.imageioimpl.common.PackageUtil.getVersion())
     println(com.sun.media.imageioimpl.common.PackageUtil.getSpecificationTitle())
     println("########################")
+    println("class path")
+    val cl = ClassLoader.getSystemClassLoader
+    cl.asInstanceOf[java.net.URLClassLoader].getURLs.foreach(println)
+
+    // triggering the error directly
+//    new ParameterBlockJAI("VectorizeSpi")
+    new ParameterBlockJAI("Vectorize")
 
     // reclassify (bin values of raster
 
