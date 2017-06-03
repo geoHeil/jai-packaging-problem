@@ -73,3 +73,6 @@ val vectorizedFeatures = extractor.execute(rasterData, 0, true, null, null, null
 spark will not mess with the classpath / not throw the error. However, this option is mandatory for my project.
 
 The problem sounds a bit similar to http://git.net/ml/geoserver-development-geospatial-java/2013-10/msg00251.html but I could not solve it yet.
+
+# edit
+Meanwhile I packaged the same parsing functionality for NiFi but I can observe the same problems i.e. that something is null which should not be null.
