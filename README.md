@@ -79,6 +79,18 @@ Meanwhile I packaged the same parsing functionality for NiFi but I can observe t
 
 
 https://stackoverflow.com/questions/7051603/jai-vendorname-null sounds somewhat similar, though I could not find missing netries in the manifest. https://stackoverflow.com/questions/9010202/adding-vendor-information-to-manifest-mf-using-sbt-assembly shows how to add some with sbt and https://github.com/geoHeil/jai-packaging-problem/commit/bedf62a93ac5c48052a30cd342aa22603d1d44db checks that they really are present - no luck there.
+This are the contents of the manifest. This looks like everything which should be there - is there.
+```
+Manifest-Version: 1.0
+Implementation-Title: myLib
+Implementation-Version: 0.0.1.SNAPSHOT
+Specification-Vendor: imagio
+Specification-Title: jaiPackagingProblems
+Implementation-Vendor-Id: imagio
+Specification-Version: 0.0.1.SNAPSHOT
+Main-Class: geo.JAIParsingProblemLocalFine
+Implementation-Vendor: myCompany
+```
 
 thread safety:
 geotools may not be threadsafe in general (http://docs.geotools.org/latest/userguide/library/main/repository.html) but from what I have tested for these specific features it seems to work fine. Also, when using a single threaded version of spark I still get the same error.
