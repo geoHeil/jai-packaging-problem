@@ -1,4 +1,4 @@
-# imageio packaging problem
+# jai native dependencies on imageio packaging problem
 
 I want to use the java library JAI to parse some spatial raster files. Unfortunately, I face strange classpath issues.
 JAI only works when running via the build tool i.e. `sbt run`. 
