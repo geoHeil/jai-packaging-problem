@@ -107,12 +107,25 @@ target/scala-2.11/jaiPackagingProblems-assembly-0.0.1.SNAPSHOT.jar
 Which shows 
 ![null - not null validation](img/debugNotNull.png "null not null validation")
 
+### closer look at the sources
+
 But digging deeper one will find (see below) which performs an lookup by name. This must be returning NULL
 ```
+# snippet decompiled by intelliJ
 public ParameterBlockJAI(String operationName) {
         this((OperationDescriptor)JAI.getDefaultInstance().getOperationRegistry().getDescriptor(class$javax$media$jai$OperationDescriptor == null?(class$javax$media$jai$OperationDescriptor = class$("javax.media.jai.OperationDescriptor")):class$javax$media$jai$OperationDescriptor, operationName));
 }
 ```
+I am not entirely sure which class is actually behind this interface: `class$javax$media$jai$OperationDescriptor` but for `operationName` it does not seem to be on the classpath of the fat jar when called via spark or NiFi.
+https://fossies.org/dox/LightZone-4.1.7/ParameterBlockJAI_8java_source.html is showing a source of
+```
+public ParameterBlockJAI(String operationName) {
+  176     this((OperationDescriptor)
+  177          JAI.getDefaultInstance().getOperationRegistry().
+  178              getDescriptor(OperationDescriptor.class, operationName));
+  179     }
+```
+The sources of operation descriptor can be found https://github.com/mauricio/jai-core/blob/master/src/share/classes/javax/media/jai/OperationDescriptor.java
 
 I think this must have something to do with my fat-jar /assembly merge strategy 
 
@@ -125,6 +138,33 @@ case PathList("META-INF", xs@_*) =>
         }
 ```
 
+specifically following the sources I see
+```
+public RegistryElementDescriptor getDescriptor(Class descriptorClass, String descriptorName) {
+        if(descriptorClass != null && descriptorName != null) {
+            String[] supportedModes = RegistryMode.getModeNames(descriptorClass);
+            if(supportedModes == null) {
+                throw new IllegalArgumentException(JaiI18N.formatMsg("OperationRegistry4", new Object[]{descriptorClass.getName()}));
+            } else {
+                for(int i = 0; i < supportedModes.length; ++i) {
+                    DescriptorCache dc = this.getDescriptorCache(supportedModes[i]);
+                    RegistryElementDescriptor red;
+                    if((red = dc.getDescriptor(descriptorName)) != null) {
+                        return red;
+                    }
+                }
+
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException(JaiI18N.getString("Generic0"));
+        }
+    }
+```
+where the first exception is widely known i.w. would throwh a correct exception I am seeing the null response.
+
+
+### thoughts about assembly process
 And the following files are merged or selected as first
 
 ```
@@ -158,6 +198,7 @@ But the ones shown in the screenshot like `tile encoder` are referenced in anoth
 
 
 JAI.getDefaultInstance().getOperationRegistry().getDescriptor(Class.forName("org.jaitools.media.jai.vectorize.VectorizeDescriptor"),"Vectorize")
+
 
 ## long term
 https://github.com/geotools/geotools/wiki/Replace-JAI
