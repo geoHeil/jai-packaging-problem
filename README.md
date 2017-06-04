@@ -117,12 +117,12 @@ public ParameterBlockJAI(String operationName) {
 I think this must have something to do with my fat-jar /assembly merge strategy 
 
 ```
-//   Concatenate everything in the services directory to keep GeoTools happy.
-        case ("services" :: _ :: Nil) =>
-          MergeStrategy.concat
-        // Concatenate these to keep JAI happy.
-        case ("javax.media.jai.registryFile.jai" :: Nil) | ("registryFile.jai" :: Nil) | ("registryFile.jaiext" :: Nil) =>
-          MergeStrategy.concat
+case PathList("META-INF", xs@_*) =>
+        xs match {
+          case ("javax.media.jai.registryFile.jai" :: Nil) | ("registryFile.jai" :: Nil) | ("registryFile.jaiext" :: Nil) =>
+                    MergeStrategy.concat
+          case _ => MergeStrategy.first
+        }
 ```
 
 And the following files are merged or selected as first
