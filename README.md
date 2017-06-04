@@ -379,6 +379,6 @@ And the following files are merged
 
 ## different merge strategy
 
-I am pretty convinced now that something is wrong with my merge strategy. https://github.com/geoHeil/jai-packaging-problem/commit/c7ba46be2c2bcbab8196fd6ece1dfd3dece89594 Helps to get rid of all the duplciation Errors of JAI registry on startup, still the error is the same.
+I am pretty convinced now that something is wrong with my merge strategy. https://github.com/geoHeil/jai-packaging-problem/tree/tryOtherMergeStrategyFailsAsWell specifically https://github.com/geoHeil/jai-packaging-problem/blob/tryOtherMergeStrategyFailsAsWell/build.sbt#L109-L115 helps to get rid of all the duplciation Errors of JAI registry on startup but will not fix the error.
 
-Apparently https://gist.github.com/mbedward/7669318 should work. But when using it here https://github.com/geoHeil/geomesa-nifi/tree/rasterAsciiGridToWKT I see the same problems in NiFi
+Apparently https://gist.github.com/mbedward/7669318 should work. But when using it here https://github.com/geoHeil/geomesa-nifi/tree/rasterAsciiGridToWKT I see the same problems in NiFi.
