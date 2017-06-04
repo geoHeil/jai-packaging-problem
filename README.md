@@ -161,7 +161,7 @@ public RegistryElementDescriptor getDescriptor(Class descriptorClass, String des
         }
     }
 ```
-where the first exception is widely known i.w. would throwh a correct exception I am seeing the null response.
+where the first exception is widely known i.w. would thrown a correct exception I am seeing the null response.
 
 
 ### thoughts about assembly process
