@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: jaiPackagingProblems
+Implementation-Version: 0.0.1.SNAPSHOT
+Specification-Vendor: imagio
+Specification-Title: jaiPackagingProblems
+Implementation-Vendor-Id: imagio
+Specification-Version: 0.0.1.SNAPSHOT
+Main-Class: geo.JAIParsingProblemLocalFine
+Implementation-Vendor: imagio
+
