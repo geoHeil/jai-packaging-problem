@@ -125,7 +125,15 @@ I think this must have something to do with my fat-jar /assembly merge strategy
           MergeStrategy.concat
 ```
 
-As some errors can be seen during startup
+As some errors can be seen during startup. 
+However, a different merge strategy. https://github.com/geoHeil/jai-packaging-problem/tree/tryOtherMergeStrategyFailsAsWell specifically https://github.com/geoHeil/jai-packaging-problem/blob/tryOtherMergeStrategyFailsAsWell/build.sbt#L109-L115 helps to get rid of all the duplciation Errors of JAI registry on startup but will not fix the error.
+will help to prevent these startup error messages but not solve my problem.
+
+As I am convinced that it is a problem regarding the generated JAI registry files I will paste them here:
+https://github.com/geoHeil/jai-packaging-problem/tree/master/files
+                                                    
+                                                    Apparently https://gist.github.com/mbedward/7669318 should work. But when using it here https://github.com/geoHeil/geomesa-nifi/tree/rasterAsciiGridToWKT I see the same problems in NiFi.
+
 
 ```
 Error in registry file at line number #550
@@ -376,9 +384,3 @@ And the following files are merged
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.CoordinateOperationFactory' with strategy 'concat'
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.MathTransformFactory' with strategy 'concat'
 ```
-
-## different merge strategy
-
-I am pretty convinced now that something is wrong with my merge strategy. https://github.com/geoHeil/jai-packaging-problem/tree/tryOtherMergeStrategyFailsAsWell specifically https://github.com/geoHeil/jai-packaging-problem/blob/tryOtherMergeStrategyFailsAsWell/build.sbt#L109-L115 helps to get rid of all the duplciation Errors of JAI registry on startup but will not fix the error.
-
-Apparently https://gist.github.com/mbedward/7669318 should work. But when using it here https://github.com/geoHeil/geomesa-nifi/tree/rasterAsciiGridToWKT I see the same problems in NiFi.
