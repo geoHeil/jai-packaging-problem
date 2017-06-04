@@ -161,3 +161,4 @@ JAI.getDefaultInstance().getOperationRegistry().getDescriptor(Class.forName("org
 
 ## long term
 https://github.com/geotools/geotools/wiki/Replace-JAI
+
