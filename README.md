@@ -384,3 +384,14 @@ And the following files are merged
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.CoordinateOperationFactory' with strategy 'concat'
 [warn] Merging 'META-INF/services/org.opengis.referencing.operation.MathTransformFactory' with strategy 'concat'
 ```
+
+# fixup ideas
+
+> I ran into a similar problem using some Geotools stuff in Netbeans which uses multiple class loaders. It was very difficult to debug since it seemed to be caused by a race condition from having multiple class loaders (setting a debug breakpoint would change the behaviour and it would always work) but easy to see if this is the same problem I was having. Just make the following call prior to proceeding:
+
+`javax.imageio.spi.IIORegistry.getDefaultInstance().registerApplicationClasspathSpis();`
+
+I put this in a static ctor in the class that needed to use the underlying services so it was called once from the class that needed it so that the classloader was guaranteed to load it prior to use. 
+
+- https://github.com/locationtech/geomesa/blob/geomesa-accumulo1.5-1.0.0-rc.7/geomesa-core/src/main/scala/org/locationtech/geomesa/core/iterators/TServerClassLoader.scala#L42
+- http://techblog.applift.com/upgrading-spark
